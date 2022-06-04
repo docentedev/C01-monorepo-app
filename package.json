@@ -1,0 +1,13 @@
+{
+  "name": "music-api-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "api",
+    "app"
+  ],
+  "scripts": {},
+  "author": "",
+  "license": "ISC"
+}
