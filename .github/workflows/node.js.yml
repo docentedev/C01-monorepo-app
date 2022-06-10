@@ -21,9 +21,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        working-directory: ./api
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
+        working-directory: ./api
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
@@ -34,4 +37,5 @@ jobs:
       uses: ArtiomTr/jest-coverage-report-action@v2.0.8
       with:
         coverage-file: ./api/coverage/coverage-final.json
+        working-directory: ./api
 
