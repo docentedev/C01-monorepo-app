@@ -10,7 +10,16 @@ const QueryBuilderV2 = () => {
         select() {
             return this
         }
+        orderBy() {
+            return this
+        }
+        paginate() {
+            return this
+        }
         where() {
+            return this
+        }
+        count() {
             return this
         }
         innerJoin() {
