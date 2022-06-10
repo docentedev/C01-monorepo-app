@@ -1,6 +1,6 @@
 const Run = (pg: any) => async (sql: string, values: any[], single: Boolean) => {
     return new Promise((resolve: (result: any) => void, reject: (err: Error) => void) => {
-        pg.connect((err: Error, client: pg.Client, release: () => Promise<any>) => {
+        pg.connect((e: Error, client: pg.Client, release: () => Promise<any>) => {
             function onResult(err: Error, result: pg.Result<any> | any) {
                 release()
                 console.log('1')
@@ -20,10 +20,10 @@ const Run = (pg: any) => async (sql: string, values: any[], single: Boolean) => 
                 }
             }
 
-            if (err) {
-                console.log('2 1', err)
+            if (e) {
+                console.log('2 1', e)
                 release()
-                reject(err)
+                reject(e)
             } else {
                 console.log('2 2')
                 if (values.length === 0) {
