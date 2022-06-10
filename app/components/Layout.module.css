@@ -1,0 +1,23 @@
+.layout {
+    display: flex;
+    min-height: 100vh;
+    height: 100%;
+    background-color: rgb(242, 242, 242);
+}
+
+.sidebar {
+    width: 20rem;
+    padding: 4rem 2rem;
+}
+
+.main {
+    flex: 1 0 auto;
+    overflow: scroll;
+    width: calc(100% - 20rem);
+    padding: 4rem 2rem 4rem 0;
+}
+
+.resetLink {
+    text-decoration: none;
+    color: inherit;
+}
