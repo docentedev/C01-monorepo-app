@@ -1,3 +1,6 @@
+api/coverage
+api/dist
+app/coverage
 # Logs
 logs
 *.log
