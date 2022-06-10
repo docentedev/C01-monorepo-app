@@ -30,7 +30,8 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
 
-    - name: Code Coverage Report
-      uses: romeovs/lcov-reporter-action@v0.2.11
+    - name: Jest coverage report
+      uses: ArtiomTr/jest-coverage-report-action@v2.0.8
       with:
-        lcov-file: ./api/coverage/lcov.info
+        coverage-file: ./api/coverage/coverage-final.json
+
