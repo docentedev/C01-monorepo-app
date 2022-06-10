@@ -32,7 +32,9 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+    - name: Codecov
+      uses: codecov/codecov-action@v3.1.0
+
     - uses: ArtiomTr/jest-coverage-report-action@v2
       with:
-        coverage-file: ./api/coverage/lcoverage.info
-        base-coverage-file: ./api/coverage/lcov.info
+        files: ./api/coverage/lcov.info
