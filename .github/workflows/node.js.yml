@@ -34,7 +34,5 @@ jobs:
     - run: npm test
     - name: Codecov
       uses: codecov/codecov-action@v3.1.0
-
-    - uses: ArtiomTr/jest-coverage-report-action@v2
       with:
         files: ./api/coverage/lcov.info
