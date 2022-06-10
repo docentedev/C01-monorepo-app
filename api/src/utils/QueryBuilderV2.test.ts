@@ -66,7 +66,7 @@ describe('QueryBuilder', () => {
         }
         const result = qb().insert(musician).build()
         expect(result).toEqual({
-            "text": "INSERT INTO musician (id,first_name,last_name,city_fk) VALUES ($1,$2,$3,$4)",
+            "text": "INSERT INTO musician (id,first_name,last_name,city_fk) VALUES ($1,$2,$3,$4) RETURNING *",
             "values": ["1", "Claudio", "Estrada", 1],
             "table": "musician",
             "selectOne": false,
@@ -101,7 +101,7 @@ describe('QueryBuilder', () => {
         }
         const result = qb().update(musician).where([{ field: 'id', value: '1' }]).build()
         expect(result).toEqual({
-            "text": "UPDATE musician SET musician.id = $1, musician.first_name = $2, musician.last_name = $3, musician.city_fk = $4 WHERE musician.id = $5",
+            "text": "UPDATE musician SET id = $1, first_name = $2, last_name = $3, city_fk = $4 WHERE musician.id = $5",
             "values": ["1", "Claudio", "Estrada", 1, "1"],
             "table": "musician",
             "selectOne": false,
@@ -127,7 +127,7 @@ describe('QueryBuilder', () => {
             run: async (_sql: string, _values: any[], _single: Boolean) => { },
         })
         const result = qb().delete().where([{ field: 'id', value: '1' }]).build()
-        expect(result).toEqual({"mutateFields": [], "selectOne": false, "table": "musician", "text": "DELETE FROM musician WHERE musician.id = $1", "values": ["1"]})
+        expect(result).toEqual({"mutateFields": [], "selectOne": false, "table": "musician", "text": "DELETE FROM musician WHERE musician.id = $1 RETURNING *", "values": ["1"]})
     })
 
 
