@@ -12,7 +12,8 @@
     "start:app:dev": "npm run dev --workspace app",
     "start:api": "npm run start --workspace api",
     "start:api:build": "npm run build --workspace api",
-    "test": "npm run test --workspace api && npm run coverage --workspace api"
+    "test": "npm run test --workspace api",
+    "coverage": "npm run coverage --workspace api"
   },
   "author": "",
   "license": "ISC",
