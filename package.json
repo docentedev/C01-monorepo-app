@@ -13,6 +13,8 @@
     "start:api": "npm run start --workspace api",
     "start:api:build": "npm run build --workspace api",
     "test": "npm run test --workspace api",
+    "build:api": "npm run build --workspace api",
+    "build": "npm run build:api",
     "coverage": "npm run coverage --workspace api"
   },
   "author": "",
