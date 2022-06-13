@@ -1,9 +1,5 @@
 import cities from './cities'
 import Pg from '../../__mocks__/Pg'
-import QueryBuilderV2 from '../../__mocks__/QueryBuilderV2'
-
-//jest.mock('../utils/QueryBuilderV2', QueryBuilderV2)
-
 describe('Cities', () => {
     it('getBy', async () => {
         const pg = Pg({ rows: [{ "id": 2, "name": "test" }] })
