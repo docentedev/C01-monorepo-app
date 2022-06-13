@@ -7,7 +7,7 @@ const Pg = (result: any = {
     connect: (callback: Function) => {
         const client = {
             query: (sql: string, call: Function | any[], cb: Function) => {
-                console.log(sql,'-' ,result,'-', cb,'-', callback)
+                // console.log(sql,'-' ,result,'-', cb,'-', callback)
                 if (typeof call === 'function') {
                     call(null, result)
                 } else {

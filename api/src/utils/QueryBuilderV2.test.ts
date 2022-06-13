@@ -157,7 +157,7 @@ describe('QueryBuilder', () => {
             as: ['country as co', 'city as c'],
             fields: ['id', 'name', 'admin_name'],
             select: 'c.id, c.name, c.admin_name',
-            debug: true,
+            // debug: true,
             run: async (sql: string, values: any[], single: Boolean) => Promise.resolve({ sql, values, single }),
         })
 
