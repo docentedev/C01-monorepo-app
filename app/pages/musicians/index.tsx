@@ -9,6 +9,7 @@ import Button from '@mui/material/Button'
 import EditIcon from '@mui/icons-material/Edit'
 // import Image from 'next/image'
 import { Avatar } from '@mui/material'
+import { PUBLIC_URL } from '../../config'
 
 const columns: GridColDef[] = [
   // { field: 'id', headerName: 'ID' },
@@ -22,7 +23,7 @@ const columns: GridColDef[] = [
       <div>{rowData.row.image && (
         <Avatar
           alt={rowData.row.first_name}
-          src={`http://localhost:3001/api/v1/files/${rowData.row.image}`}
+          src={`${PUBLIC_URL}/${rowData.row.image}`}
           sx={{ width: 24, height: 24 }}
         />
         /* <Image

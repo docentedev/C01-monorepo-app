@@ -50,7 +50,7 @@ const Musician = ({ initialData }: any) => {
               />
             </Paper>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} style={{ display: 'none' }}>
             <Paper style={{ padding: 10 }}>
               <pre>{JSON.stringify(data, null, 2)}</pre>
             </Paper>
