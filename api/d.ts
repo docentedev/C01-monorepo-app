@@ -138,6 +138,18 @@ declare module 'fastify' {
         pg: pg.Pg
     }
 
+    export interface FastifyRequest {
+        file: () => Promise<{
+            file: NodeJS.ReadableStream
+            fields: {
+                [key: string]: string
+            }
+            filename: string
+            encoding: string
+            mimetype: string
+        }>
+    }
+
     type UserRequest = FastifyRequest<{
         Params: { id: number }
         Querystring: { page?: number, size?: number, sort?: 'asc' | 'desc', order?: string, q?: string }

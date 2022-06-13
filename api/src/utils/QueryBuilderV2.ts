@@ -252,8 +252,9 @@ class QueryBuilder<T> {
      * query.where({ field: 'name' }, 'john')
      * query.where([{ field: 'name', mode: 'like' }, { field: 'email', mode: 'like' }], 'john')
      * query.where(['name' }, { 'email' }], 'john')
+     * query.where('name', 'john')
      */
-    where(fields: SearchItem[] | SearchItem | string[], value: any = '', modeProp: Mode = '=') {
+    where(fields: SearchItem[] | SearchItem | string[] | string, value: any = '', modeProp: Mode = '=') {
         const defaultValue = value
         const defaultMode = modeProp ? modeProp.toUpperCase() : '=';
         this.#sqlText += ` WHERE`;
@@ -268,7 +269,7 @@ class QueryBuilder<T> {
                 }
             })
         } else {
-            items.push(fields)
+            items.push(typeof fields === 'string' ? { field: fields } : fields)
         }
 
         const itemsLen = items.length
@@ -395,6 +396,20 @@ class QueryBuilder<T> {
 export const initQueryBuilder = <T>(props: QueryBuilderProps) => {
     const init = props
     return () => new QueryBuilder<T>(init);
+}
+
+const getAllowedField = (allowedFields: string[], model: { [key: string]: string }) => {
+    const output: { [key: string]: string } = {}
+    Object.keys(model).forEach((key: string) => {
+        if (allowedFields.includes(key)) {
+            output[key] = model[key]
+        }
+    })
+    return output
+}
+
+export const Utils = {
+    getAllowedField,
 }
 
 export default QueryBuilder;

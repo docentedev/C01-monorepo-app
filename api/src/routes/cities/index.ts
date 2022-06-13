@@ -1,11 +1,9 @@
-
-
 import { FastifyInstance, UserRequest } from "fastify"
 import citiesDb from '../../models/cities'
 
-const routes = (instance: FastifyInstance, opts: any, next: () => void) => {
-    const qb = citiesDb(instance.pg)
-    instance.get('/', async (req: UserRequest, reply) => {
+const routes = async (fastify: FastifyInstance, opts: any, done: Function) => {
+    const qb = citiesDb(fastify.pg)
+    fastify.get('/', async (req: UserRequest, reply) => {
         try {
             const { page = 1, size = 10, sort = 'desc', order = 'id' } = req.query
             const result = await qb.getAllPaginate({ page, size, sort, order })
@@ -15,7 +13,7 @@ const routes = (instance: FastifyInstance, opts: any, next: () => void) => {
         }
     })
 
-    instance.get('/:id', async (req: UserRequest, reply) => {
+    fastify.get('/:id', async (req: UserRequest, reply) => {
         try {
             const result = await qb.getBy('id', req.params.id)
             reply.send(result)
@@ -23,9 +21,9 @@ const routes = (instance: FastifyInstance, opts: any, next: () => void) => {
             reply.send(error)
         }
     })
-    
+
     // /search?q=%s&fields=%s
-    instance.get('/search', async (req: UserRequest, reply) => {
+    fastify.get('/search', async (req: UserRequest, reply) => {
         try {
             const { q } = req.query
             if (!q || `${q ?? ''}`.length < 3) {
@@ -37,8 +35,7 @@ const routes = (instance: FastifyInstance, opts: any, next: () => void) => {
             reply.send(error)
         }
     })
-
-    next()
+    done()
 }
 
 export default routes

@@ -1,4 +1,4 @@
-import { initQueryBuilder, IMutation } from './QueryBuilderV2'
+import { initQueryBuilder, IMutation, Utils } from './QueryBuilderV2'
 
 interface Musician extends IMutation {
     id?: string
@@ -48,6 +48,9 @@ describe('QueryBuilder', () => {
 
         const result9 = qb().select('name').where([{ field: 'city__name', value: 'Claudio' }, { field: 'id', value: 'Claudio' }]).build()
         expect(result9).toEqual({ "fields": [{ "field": "id", "table": "c", "tableName": "city" }, { "field": "name", "table": "c", "tableName": "city" }, { "field": "admin_name", "table": "c", "tableName": "city" }], "selectOne": false, "table": "city", "text": "SELECT c.name FROM city AS c WHERE c.name = $1 OR c.id = $2", "values": ["Claudio", "Claudio"] })
+
+        const result10 = qb().select('name').where('city__name', 'Claudio').build()
+        expect(result10).toEqual({ "fields": [{ "field": "id", "table": "c", "tableName": "city" }, { "field": "name", "table": "c", "tableName": "city" }, { "field": "admin_name", "table": "c", "tableName": "city" }], "selectOne": false, "table": "city", "text": "SELECT c.name FROM city AS c WHERE c.name = $1", "values": ["Claudio"] })
 
     });
 
@@ -127,7 +130,7 @@ describe('QueryBuilder', () => {
             run: async (_sql: string, _values: any[], _single: Boolean) => { },
         })
         const result = qb().delete().where([{ field: 'id', value: '1' }]).build()
-        expect(result).toEqual({"mutateFields": [], "selectOne": false, "table": "musician", "text": "DELETE FROM musician WHERE musician.id = $1 RETURNING *", "values": ["1"]})
+        expect(result).toEqual({ "mutateFields": [], "selectOne": false, "table": "musician", "text": "DELETE FROM musician WHERE musician.id = $1 RETURNING *", "values": ["1"] })
     })
 
 
@@ -162,4 +165,9 @@ describe('QueryBuilder', () => {
         expect(result).toStrictEqual({ "single": false, "sql": "SELECT * FROM city AS c WHERE c.id = $1", "values": ["Claudio"] })
 
     });
+
+    test('Utils.getAllowedField should return a object with name=Claudio key', () => {
+        const result = Utils.getAllowedField(['name'], { name: 'Claudio', last_name: 'Rojas' })
+        expect(result).toStrictEqual({ name: 'Claudio' })
+    })
 });
