@@ -7,6 +7,7 @@ import Paper from '@mui/material/Paper'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import Typography from '@mui/material/Typography'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
+import Menu from '@mui/icons-material/Menu'
 import styles from './Layout.module.css'
 
 const ItemLink = ({ currentUrl, text, url, exact = true }: any) => {
@@ -27,9 +28,16 @@ const ItemLink = ({ currentUrl, text, url, exact = true }: any) => {
 }
 
 export default function Sidebar () {
+  const [open, setOpen] = React.useState(false)
   const router = useRouter()
   return (
-        <div className={styles.sidebar}>
+        <div className={`${styles.sidebar} ${open ? styles.sidebarOpen : ''}`}>
+            <button
+                className={styles.sidebarButton}
+                onClick={() => setOpen(!open)}
+            >
+                <Menu />
+            </button>
             <Paper>
                 <MenuList>
                     <ItemLink currentUrl={router.pathname} text="Home" url="/" />

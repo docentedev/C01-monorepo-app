@@ -11,6 +11,53 @@ import BreadcrumbsSite from '../../components/BreadcrumbsSite'
 import makeBaseurl from '../../utils/makeBaseurl'
 import MusicianForm from '../../components/MusicianForm'
 
+const uploadFileWithIdRequest = (id: string, file: any) => {
+  const form = new FormData()
+  form.append('file', file)
+  form.append('id', id)
+
+  fetch('/api/musicians/upload/file', {
+    method: 'POST',
+    body: form
+  })
+    .then(response => {
+      console.log(response)
+    })
+    .catch(err => {
+      console.error(err)
+    })
+}
+
+const UploadForm = ({ id: initialId }: { id: string }) => {
+  const [file, setFile] = useState(null)
+  const [id, setId] = useState(initialId)
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0])
+  }
+
+  const handleIdChange = (e) => {
+    setId(e.target.value)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (file && id) {
+      uploadFileWithIdRequest(id, file)
+    } else {
+      console.log('no file or id')
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="file" onChange={handleFileChange} />
+      <input type="text" onChange={handleIdChange} value={id} />
+      <button type="submit">Submit</button>
+    </form>
+  )
+}
+
 const Musician = ({ initialData }: any) => {
   const [openSuccess, setOpenSuccess] = useState(false)
   const [data, setData] = useState(initialData)
@@ -90,6 +137,7 @@ const Musician = ({ initialData }: any) => {
             </Paper>
           </Grid>
         </Grid>
+        <UploadForm id={data.id} />
       </div>
       )
     : (
