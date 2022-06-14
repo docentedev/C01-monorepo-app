@@ -25,7 +25,6 @@ fastify.register(citiesRoute, { prefix: 'api/v1/cities' })
 
 fastify.listen({
     port: Number(PORT),
-    host: '0.0.0.0',
 }, function (err, address) {
     if (err) {
         fastify.log.error(err)
