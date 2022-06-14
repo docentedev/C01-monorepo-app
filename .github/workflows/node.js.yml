@@ -28,8 +28,8 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
-    - run: npm start:api:build
-    - run: npm start:api:start
+    - run: npm run api:build
+    - run: npm run api:start
   test:
     runs-on: ubuntu-latest
 
