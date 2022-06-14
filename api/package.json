@@ -1,7 +1,7 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Musician API",
   "main": "src/index.js",
   "scripts": {
     "build": "rm -rf ./dist/ && tsc -p tsconfig.json",
