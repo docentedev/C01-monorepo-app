@@ -12,10 +12,12 @@
     "start:app:dev": "npm run dev --workspace app",
     "start:api": "npm run start --workspace api",
     "start:api:build": "npm run build --workspace api",
+    "start:api:start": "npm run start --workspace api",
     "test": "npm run test --workspace api",
     "build:api": "npm run build --workspace api",
     "build": "npm run build:api",
-    "coverage": "npm run coverage --workspace api"
+    "coverage": "npm run coverage --workspace api",
+    "localip": "ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' | grep -v '127.0.0.1'"
   },
   "author": "",
   "license": "ISC",
